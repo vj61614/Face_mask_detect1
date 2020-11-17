@@ -1,6 +1,8 @@
 import logging
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 from fastai.vision.all import load_learner
+import os
+PORT = int(os.environ.get('PORT', 5000))
 
 def start(update, context):
     update.message.reply_text(
@@ -36,14 +38,17 @@ def detect_mask(update, context):
 
 def main():
     load_model()
-    updater = Updater(token="1476148585:AAFvhNUzQZPLQPKssgSGNromrbvduAizHIk", use_context=True)
+    TOKEN = "1476148585:AAFvhNUzQZPLQPKssgSGNromrbvduAizHIk"
+    updater = Updater(token = TOKEN, use_context=True)
     dp = updater.dispatcher
     dp.add_handler(CommandHandler("start", start))
     dp.add_handler(CommandHandler("help", help_command))
 
     dp.add_handler(MessageHandler(Filters.photo, detect_mask))
-
-    updater.start_polling()
+    updater.start_webhook(listen="0.0.0.0",
+                          port=int(PORT),
+                          url_path=TOKEN)
+    updater.bot.setWebhook('https://yourherokuappname.herokuapp.com/' + TOKEN)
     updater.idle()
 
 if __name__ == '__main__':
