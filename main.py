@@ -36,7 +36,7 @@ def detect_mask(update, context):
 
 def main():
     load_model()
-    updater = Updater(token="token", use_context=True)
+    updater = Updater(token="1476148585:AAFvhNUzQZPLQPKssgSGNromrbvduAizHIk", use_context=True)
     dp = updater.dispatcher
     dp.add_handler(CommandHandler("start", start))
     dp.add_handler(CommandHandler("help", help_command))
