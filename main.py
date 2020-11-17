@@ -48,7 +48,7 @@ def main():
     updater.start_webhook(listen="0.0.0.0",
                           port=int(PORT),
                           url_path=TOKEN)
-    updater.bot.setWebhook('https://yourherokuappname.herokuapp.com/' + TOKEN)
+    updater.bot.setWebhook('https://facemaskdetectsa.herokuapp.com/' + TOKEN)
     updater.idle()
 
 if __name__ == '__main__':
